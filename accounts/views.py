@@ -40,6 +40,9 @@ def register_view(request):
         email = request.POST.get('email')
         phone = request.POST.get('mobile')
         barangay = request.POST.get('barangay')
+        age = request.POST.get('age') or None
+        sex = request.POST.get('sex', '').strip()
+        address = request.POST.get('address', '').strip()
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
 
@@ -66,7 +69,15 @@ def register_view(request):
         user.last_name = last_name
         user.save()
 
-        Profile.objects.create(user=user, role='resident', phone_number=phone, barangay=barangay)
+        Profile.objects.create(
+            user=user,
+            role='resident',
+            phone_number=phone,
+            barangay=barangay,
+            age=age,
+            sex=sex,
+            address=address,
+        )
 
         messages.success(request, 'Account created successfully. Please log in.')
         return redirect('login')

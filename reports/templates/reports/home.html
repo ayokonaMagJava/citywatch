@@ -20,7 +20,7 @@ fontFamily: { sans: ['Inter', 'sans-serif'] }
 </style>
 </head>
 <body class="bg-surface text-on-surface font-sans antialiased">
-<header class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-outline bg-white px-5 md:px-16">
+<header class="sticky top-0 z-50 flex h-14 items-center justify-between border-b border-outline bg-white px-5 md:px-12">
 <a href="{% url 'home' %}" class="text-xl font-extrabold tracking-tight text-primary">CityWatch</a>
 <nav class="hidden items-center gap-8 text-sm font-semibold md:flex">
 <a class="border-b-2 border-primary pb-1 text-primary" href="{% url 'home' %}">Home</a>
@@ -79,6 +79,6 @@ fontFamily: { sans: ['Inter', 'sans-serif'] }
 
 <section class="bg-primary px-5 py-16 text-center text-white md:px-16 md:py-24"><h2 class="text-3xl font-bold">Our Community Impact</h2><div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-3"><div><strong class="block text-4xl text-blue-100">{{ resolved_count }}+</strong><span class="text-blue-200">Reports Resolved</span></div><div><strong class="block text-4xl text-blue-100">24/7</strong><span class="text-blue-200">Support Available</span></div><div><strong class="block text-4xl text-blue-100">{{ participant_count }}+</strong><span class="text-blue-200">Local Participants</span></div></div></section>
 </main>
-<footer class="flex flex-col items-center justify-between gap-4 border-t border-outline bg-slate-200 px-5 py-10 text-sm text-on-variant md:flex-row md:px-16"><strong class="text-xl text-primary">CityWatch</strong><span>© 2026 CityWatch Baliwag. All rights reserved.</span><div class="flex gap-5"><a href="#" class="hover:text-primary">Privacy</a><a href="#" class="hover:text-primary">Terms</a><a href="#" class="hover:text-primary">Contact</a></div></footer>
+<footer class="flex flex-col items-center justify-between gap-3 border-t border-outline bg-slate-200 px-5 py-5 text-sm text-on-variant md:flex-row md:px-12"><strong class="text-lg text-primary">CityWatch</strong><span>© 2026 CityWatch Baliwag. All rights reserved.</span><div class="flex gap-4"><a href="#" class="hover:text-primary">Privacy</a><a href="#" class="hover:text-primary">Terms</a><a href="#" class="hover:text-primary">Contact</a></div></footer>
 </body>
 </html>

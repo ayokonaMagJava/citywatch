@@ -34,7 +34,7 @@ fontFamily: { sans: ['Inter', 'sans-serif'] }
 </nav>
 {% endif %}
 <div class="{% if request.user.is_authenticated %}lg:ml-64{% endif %} flex min-h-screen flex-col">
-<header class="sticky top-0 z-30 flex min-h-16 items-center justify-end gap-4 border-b border-outline bg-white px-5 py-3 md:px-16">
+<header class="sticky top-0 z-30 flex min-h-14 items-center justify-end gap-3 border-b border-outline bg-white px-5 py-2 md:px-12">
 {% if not request.user.is_authenticated %}<a class="mr-auto text-xl font-bold text-primary-dark" href="{% url 'home' %}">CityWatch</a>{% endif %}
 <form method="GET" class="relative w-full max-w-xs"><label class="sr-only" for="board-search">Search community reports</label><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-variant">search</span><input id="board-search" name="q" value="{{ search_query }}" class="w-full rounded-full border border-outline bg-surface-low py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search community news..." type="search">{% if status_filter %}<input type="hidden" name="status" value="{{ status_filter }}">{% endif %}{% if category_filter %}<input type="hidden" name="category" value="{{ category_filter }}">{% endif %}</form>
 <button class="relative rounded-full p-2 text-on-variant hover:bg-surface-low" type="button" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span></button>
