@@ -10,36 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 tailwind.config = { theme: { extend: {
-colors: { primary: '#1a365d', 'primary-dark': '#002045', secondary: '#0a6c44', 'secondary-container': '#9ff5c1', surface: '#f7fafc', 'surface-low': '#f1f4f6', 'surface-high': '#e5e9eb', 'on-surface': '#181c1e', 'on-variant': '#43474e', outline: '#c4c6cf', 'warning-container': '#ffdeaa', warning: '#5f4100' },
+colors: { primary: '#002045', 'primary-dark': '#002045', 'primary-container': '#1a365d', 'on-primary-container': '#ffffff', secondary: '#0a6c44', 'secondary-container': '#9ff5c1', surface: '#f7fafc', background: '#f7fafc', 'surface-low': '#f1f4f6', 'surface-container-low': '#f1f4f6', 'surface-container-lowest': '#ffffff', 'surface-high': '#e5e9eb', 'on-surface': '#181c1e', 'on-surface-variant': '#43474e', 'on-variant': '#43474e', outline: '#74777f', 'outline-variant': '#c4c6cf', error: '#ba1a1a', 'error-container': '#ffdad6', 'warning-container': '#ffdeaa', warning: '#5f4100' },
 fontFamily: { sans: ['Inter', 'sans-serif'] }
 } } }
 </script>
 <style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
 </head>
-<body class="bg-surface text-on-surface font-sans antialiased min-h-screen">
-{% if request.user.is_authenticated %}
-<nav class="hidden lg:flex fixed left-0 top-0 z-40 h-screen w-64 flex-col bg-white">
-<div class="border-b border-outline px-6 py-5"><a class="text-xl font-bold text-primary-dark" href="{% url 'home' %}">CityWatch</a></div>
-<div class="flex flex-1 flex-col px-2 py-4">
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-on-variant hover:bg-surface-low" href="{% url 'resident_dashboard' %}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-on-variant hover:bg-surface-low" href="{% url 'report_create' %}"><span class="material-symbols-outlined">add_circle</span>Submit Report</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-on-variant hover:bg-surface-low" href="{% url 'report_list' %}"><span class="material-symbols-outlined">folder_shared</span>My Reports</a>
-<a class="flex items-center gap-3 rounded-lg bg-primary text-white px-4 py-3 text-sm font-semibold" href="{% url 'public_board' %}"><span class="material-symbols-outlined">public</span>Public Board</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-on-variant hover:bg-surface-low" href="{% url 'announcements' %}"><span class="material-symbols-outlined">campaign</span>Announcements</a>
-</div>
-<div class="border-t border-outline px-2 py-4">
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-on-variant hover:bg-surface-low" href="{% url 'profile' %}"><span class="material-symbols-outlined">settings</span>Settings</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-semibold text-red-700 hover:bg-red-50" href="{% url 'logout' %}"><span class="material-symbols-outlined">logout</span>Logout</a>
-</div>
-</nav>
-{% endif %}
-<div class="{% if request.user.is_authenticated %}lg:ml-64{% endif %} flex min-h-screen flex-col">
-<header class="sticky top-0 z-30 flex min-h-14 items-center justify-end gap-3 border-b border-outline bg-white px-5 py-2 md:px-12">
-{% if not request.user.is_authenticated %}<a class="mr-auto text-xl font-bold text-primary-dark" href="{% url 'home' %}">CityWatch</a>{% endif %}
-<form method="GET" class="relative w-full max-w-xs"><label class="sr-only" for="board-search">Search community reports</label><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-variant">search</span><input id="board-search" name="q" value="{{ search_query }}" class="w-full rounded-full border border-outline bg-surface-low py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search community news..." type="search">{% if status_filter %}<input type="hidden" name="status" value="{{ status_filter }}">{% endif %}{% if category_filter %}<input type="hidden" name="category" value="{{ category_filter }}">{% endif %}</form>
-<button class="relative rounded-full p-2 text-on-variant hover:bg-surface-low" type="button" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span></button>
-{% if request.user.is_authenticated %}<a class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-outline" href="{% url 'profile' %}">{% if request.user.profile.profile_picture %}<img class="h-full w-full object-cover" src="{{ request.user.profile.profile_picture.url }}" alt="User profile photo">{% else %}<span class="material-symbols-outlined text-on-variant">account_circle</span>{% endif %}</a>{% else %}<a class="text-sm font-semibold text-primary-dark" href="{% url 'login' %}">Sign In</a>{% endif %}
-</header>
+<body class="bg-surface text-on-surface font-sans antialiased min-h-screen flex">
+{% if request.user.is_authenticated %}{% include 'reports/partials/resident_sidebar.html' %}{% endif %}
+<div class="flex-1 min-w-0 flex min-h-screen flex-col">
+{% if request.user.is_authenticated %}{% include 'reports/partials/resident_header.html' %}{% else %}<header class="h-14 border-b border-outline bg-white flex items-center justify-end gap-3 px-5 md:px-12"><a class="mr-auto text-xl font-bold text-primary-dark" href="{% url 'home' %}">CityWatch</a><a class="text-sm font-semibold text-primary-dark" href="{% url 'login' %}">Sign In</a></header>{% endif %}
 <main class="flex-1 overflow-y-auto bg-surface p-5 md:p-8"><div class="mx-auto max-w-7xl space-y-6">
 <div><h1 class="text-3xl font-semibold text-primary-dark">Community Transparency Board</h1><p class="mt-2 text-lg text-on-variant">View and track all community-reported issues and their current resolution status.</p></div>
 <section class="grid grid-cols-1 gap-6 md:grid-cols-3"><div class="flex flex-col justify-center rounded-xl border border-outline bg-white p-6"><h2 class="text-xs font-semibold uppercase tracking-wider text-on-variant">Total Issues Reported</h2><p class="mt-2 text-5xl font-bold text-primary">{{ total_reports }}</p></div><div class="flex flex-col justify-center rounded-xl border border-outline bg-white p-6"><h2 class="text-xs font-semibold uppercase tracking-wider text-on-variant">Resolved</h2><p class="mt-2 text-5xl font-bold text-secondary">{{ resolved_count }}</p></div><div class="flex flex-col justify-center rounded-xl border border-outline bg-white p-6"><h2 class="text-xs font-semibold uppercase tracking-wider text-on-variant">Avg. Resolution Time</h2><p class="mt-2 text-5xl font-bold text-primary">{{ average_resolution_days }} <span class="text-xl font-semibold text-on-variant">Days</span></p></div></section>

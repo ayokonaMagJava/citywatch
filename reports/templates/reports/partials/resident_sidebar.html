@@ -1,0 +1,29 @@
+<style>.resident-sidebar { width: 256px; min-width: 256px; }</style>
+<aside class="resident-sidebar hidden lg:flex bg-surface-container-lowest border-r border-outline-variant flex-col sticky top-0 h-screen z-50 flex-shrink-0">
+<div class="p-6 border-b border-outline-variant">
+<a class="flex items-center gap-2 text-xl font-bold text-primary" href="{% url 'home' %}">
+<span class="material-symbols-outlined">location_city</span>CityWatch
+</a>
+<p class="text-xs text-on-surface-variant mt-2">Resident portal</p>
+</div>
+<nav class="flex-grow p-4 flex flex-col gap-2" aria-label="Resident navigation">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'resident_dashboard' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'resident_dashboard' %}">
+<span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'report_create' or request.resolver_match.url_name == 'report_edit' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'report_create' %}">
+<span class="material-symbols-outlined">add_circle</span>Submit Report</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'report_list' or request.resolver_match.url_name == 'report_detail' or request.resolver_match.url_name == 'report_delete' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'report_list' %}">
+<span class="material-symbols-outlined">folder_open</span>My Reports</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'public_board' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'public_board' %}">
+<span class="material-symbols-outlined">public</span>Public Board</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'announcements' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'announcements' %}">
+<span class="material-symbols-outlined">campaign</span>Announcements</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'notification_list' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'notification_list' %}">
+<span class="material-symbols-outlined">notifications</span>Notifications{% if unread_notifications_count %}<span class="ml-auto min-w-5 h-5 px-1 rounded-full bg-error text-white text-[10px] flex items-center justify-center">{{ unread_notifications_count }}</span>{% endif %}</a>
+</nav>
+<div class="p-4 border-t border-outline-variant flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg {% if request.resolver_match.url_name == 'profile' %}bg-primary-container text-white{% else %}text-on-surface-variant hover:bg-surface-container-low{% endif %} transition-colors text-sm font-semibold" href="{% url 'profile' %}">
+<span class="material-symbols-outlined">settings</span>Settings</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-error hover:bg-error-container transition-colors text-sm font-semibold" href="{% url 'logout' %}">
+<span class="material-symbols-outlined">logout</span>Logout</a>
+</div>
+</aside>
